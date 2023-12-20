@@ -66,6 +66,9 @@ class Intro {
   // Click on whether the mask is allowed to be closed.
   final bool maskClosable;
 
+  /// Whether intro should be closed when back button or back gesture is performed
+  final bool closeOnBack;
+
   /// The method of generating the content of the guide page,
   /// which will be called internally by [Intro] when the guide page appears.
   /// And will pass in some parameters on the current page through [StepWidgetParams]
@@ -94,6 +97,7 @@ class Intro {
     this.borderRadius = const BorderRadius.all(Radius.circular(4)),
     this.padding = const EdgeInsets.all(8),
     this.onHighlightWidgetTap,
+    this.closeOnBack = false,
   }) : assert(stepCount > 0) {
     _animationDuration =
         noAnimation ? Duration(milliseconds: 0) : Duration(milliseconds: 300);
@@ -283,7 +287,21 @@ class Intro {
         );
       },
     );
-    Overlay.of(context)!.insert(_overlayEntry!);
+    Overlay.of(context).insert(_overlayEntry!);
+    if (closeOnBack) {
+      _introRoute = ModalRoute.of(context);
+      _introRoute?.addScopedWillPopCallback(_willPopCallback);
+    }
+  }
+
+  ModalRoute? _introRoute;
+
+  Future<bool> _willPopCallback() async {
+    if (_overlayEntry != null) {
+      _onFinish();
+      return false;
+    }
+    return true;
   }
 
   void _onNext(BuildContext context) {
@@ -300,15 +318,16 @@ class Intro {
     }
   }
 
-  void _onFinish() {
+  void _onFinish({bool isDisposing = false}) {
     if (_overlayEntry == null) return;
     _removed = true;
-    _overlayEntry!.markNeedsBuild();
+    if (!isDisposing) _overlayEntry!.markNeedsBuild();
     Timer(_animationDuration, () {
       if (_overlayEntry == null) return;
       _overlayEntry!.remove();
       _overlayEntry = null;
     });
+    if (closeOnBack) _introRoute?.removeScopedWillPopCallback(_willPopCallback);
   }
 
   void _createStepWidget(BuildContext context) {
@@ -357,7 +376,7 @@ class Intro {
 
   /// Destroy the guide page and release all resources
   void dispose() {
-    _onFinish();
+    _onFinish(isDisposing: true);
   }
 
   /// Get intro instance current status

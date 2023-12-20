@@ -1,3 +1,10 @@
+## [2.3.2]
+
+* Add `closeOnBack` to close intro when back button or back gesture is performed, with this you 
+  don't need to manually add a `WillPopScope` in your app.
+* Fix: FlutterIntroException: The current context is null, because there is no widget in the tree that matches this global key.
+* Bump minimum supported Flutter version to 3.3.0
+
 ## [2.3.1]
 
 * Throw a friendly error when something goes wrong.
