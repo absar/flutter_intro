@@ -1,3 +1,9 @@
+## [2.3.3]
+
+* Use MediaQuery.sizeOf instead of MediaQuery.of to avoid unnecessary rebuilds
+* Flutter 3.24 updates
+* Bump minimum supported sdk to 3.5
+
 ## [2.3.2]
 
 * Add `closeOnBack` to close intro when back button or back gesture is performed, with this you 

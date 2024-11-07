@@ -136,24 +136,24 @@ class StepWidgetBuilder {
                     height: 28,
                     child: OutlinedButton(
                       style: ButtonStyle(
-                        foregroundColor: MaterialStateProperty.all<Color>(
+                        foregroundColor: WidgetStateProperty.all<Color>(
                           Colors.white,
                         ),
-                        overlayColor: MaterialStateProperty.all<Color>(
+                        overlayColor: WidgetStateProperty.all<Color>(
                           Colors.white.withOpacity(0.1),
                         ),
-                        side: MaterialStateProperty.all<BorderSide>(
+                        side: WidgetStateProperty.all<BorderSide>(
                           BorderSide(
                             color: Colors.white,
                           ),
                         ),
-                        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                        padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
                           EdgeInsets.symmetric(
                             vertical: 0,
                             horizontal: 8,
                           ),
                         ),
-                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                        shape: WidgetStateProperty.all<OutlinedBorder>(
                           StadiumBorder(),
                         ),
                       ),

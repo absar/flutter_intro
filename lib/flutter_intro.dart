@@ -213,7 +213,7 @@ class Intro {
   ) {
     _overlayEntry = new OverlayEntry(
       builder: (BuildContext context) {
-        Size screenSize = MediaQuery.of(context).size;
+        Size screenSize = MediaQuery.sizeOf(context);
 
         if (screenSize.width != _lastScreenSize.width ||
             screenSize.height != _lastScreenSize.height) {
@@ -332,7 +332,7 @@ class Intro {
 
   void _createStepWidget(BuildContext context) {
     _getWidgetInfo(_globalKeys[_currentStepIndex]);
-    Size screenSize = MediaQuery.of(context).size;
+    Size screenSize = MediaQuery.sizeOf(context);
     Size widgetSize = Size(_widgetWidth!, _widgetHeight!);
 
     _stepWidget = widgetBuilder(StepWidgetParams(
@@ -364,7 +364,7 @@ class Intro {
   ///
   /// [context] Current environment [BuildContext]
   void start(BuildContext context) {
-    _lastScreenSize = MediaQuery.of(context).size;
+    _lastScreenSize = MediaQuery.sizeOf(context);
     _removed = false;
     _currentStepIndex = 0;
     _createStepWidget(context);

@@ -94,10 +94,10 @@ enum Mode {
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({
-    Key key,
-    this.title,
-    this.mode,
-  }) : super(key: key);
+    super.key,
+    required this.title,
+    required this.mode,
+  });
 
   final String title;
 
@@ -110,10 +110,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Intro intro;
+  late Intro intro;
 
   _MyHomePageState({
-    Mode mode,
+    required Mode mode,
   }) {
     if (mode == Mode.defaultTheme) {
       /// init Intro
