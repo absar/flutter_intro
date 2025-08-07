@@ -1,3 +1,7 @@
+## [2.3.4]
+
+* Flutter 3.32 updates
+
 ## [2.3.3]
 
 * Use MediaQuery.sizeOf instead of MediaQuery.of to avoid unnecessary rebuilds

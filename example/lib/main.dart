@@ -156,7 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
           widgetBuilder: (params) {
             return Container(
               decoration: BoxDecoration(
-                color: Colors.red.withOpacity(.6),
+                color: Colors.red.withAlpha((255.0 * 0.6).round()),
               ),
               child: Column(
                 children: [

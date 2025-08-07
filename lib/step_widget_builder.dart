@@ -140,7 +140,7 @@ class StepWidgetBuilder {
                           Colors.white,
                         ),
                         overlayColor: WidgetStateProperty.all<Color>(
-                          Colors.white.withOpacity(0.1),
+                          Colors.white.withAlpha((255.0 * 0.1).round()),
                         ),
                         side: WidgetStateProperty.all<BorderSide>(
                           BorderSide(
