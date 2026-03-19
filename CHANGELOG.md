@@ -1,3 +1,6 @@
+## [2.4.1] 2026-03-18
+* Fix "Null check operator used on a null value", caused due to _DelayRenderedWidgetState.didUpdateWidget calling set state in a Timer
+
 ## [2.4.0] 2026-02-07
 * BREAKING: Flutter 3.38 updates
 * BREAKING: Bump minimum supported Flutter version to 3.35

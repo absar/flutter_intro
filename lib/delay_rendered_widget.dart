@@ -23,6 +23,7 @@ class _DelayRenderedWidget extends StatefulWidget {
     this.child,
     this.childPersist = false,
   }) : super(key: key);
+
   @override
   _DelayRenderedWidgetState createState() => _DelayRenderedWidgetState();
 }
@@ -34,16 +35,14 @@ class _DelayRenderedWidgetState extends State<_DelayRenderedWidget> {
 
   /// Time interval between animations
   final Duration durationInterval = Duration(milliseconds: 100);
+
   @override
   void initState() {
     super.initState();
     child = widget.child;
     timer = Timer(durationInterval, () {
-      if (mounted) {
-        setState(() {
-          opacity = 1;
-        });
-      }
+      opacity = 1;
+      _setStateIfMounted();
     });
   }
 
@@ -58,34 +57,36 @@ class _DelayRenderedWidgetState extends State<_DelayRenderedWidget> {
     super.didUpdateWidget(oldWidget);
     var duration = widget.duration;
     if (widget.removed) {
-      setState(() {
-        opacity = 0;
-      });
+      opacity = 0;
+      _setStateIfMounted();
       return;
     }
+
     if (!identical(oldWidget.child, widget.child)) {
       if (widget.childPersist) {
-        setState(() {
-          child = widget.child;
-        });
+        child = widget.child;
+        _setStateIfMounted();
       } else {
-        setState(() {
-          opacity = 0;
-        });
+        opacity = 0;
+        _setStateIfMounted();
         Timer(
           Duration(
             milliseconds:
                 duration.inMilliseconds + durationInterval.inMilliseconds,
           ),
           () {
-            setState(() {
-              child = widget.child;
-              opacity = 1;
-            });
+            child = widget.child;
+            opacity = 1;
+            _setStateIfMounted();
           },
         );
       }
     }
+  }
+
+  void _setStateIfMounted() {
+    if (!mounted) return;
+    setState(() {});
   }
 
   @override
