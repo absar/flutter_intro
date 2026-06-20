@@ -1,3 +1,6 @@
+## [2.4.3] 2026-06-21
+* Fix: The current context is null, because there is no widget in the tree that matches this global key. Added mounted checks.
+
 ## [2.4.2] 2026-05-06
 * Flutter 3.41 updates
 

@@ -219,6 +219,7 @@ class Intro {
             screenSize.height != _lastScreenSize.height) {
           _lastScreenSize = screenSize;
           _th.throttle(() {
+            if(!context.mounted) return;
             _createStepWidget(context);
             _overlayEntry!.markNeedsBuild();
           });
@@ -287,6 +288,8 @@ class Intro {
         );
       },
     );
+
+    if(!context.mounted) return;
     Overlay.of(context).insert(_overlayEntry!);
     if (closeOnBack) {
       _introRoute = ModalRoute.of(context);
@@ -331,6 +334,7 @@ class Intro {
   }
 
   void _createStepWidget(BuildContext context) {
+    if(!context.mounted) return;
     _getWidgetInfo(_globalKeys[_currentStepIndex]);
     Size screenSize = MediaQuery.sizeOf(context);
     Size widgetSize = Size(_widgetWidth!, _widgetHeight!);
@@ -367,7 +371,9 @@ class Intro {
     _lastScreenSize = MediaQuery.sizeOf(context);
     _removed = false;
     _currentStepIndex = 0;
+    if(!context.mounted) return;
     _createStepWidget(context);
+    if(!context.mounted) return;
     _showOverlay(
       context,
       _globalKeys[_currentStepIndex],
