@@ -1,3 +1,6 @@
+## [2.4.4] 2026-08-21
+* Upgrade dependencies
+
 ## [2.4.3] 2026-06-21
 * Fix: The current context is null, because there is no widget in the tree that matches this global key. Added mounted checks.
 
